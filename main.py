@@ -4,12 +4,15 @@ from flask import Flask
 import numpy as np
 import pandas as pd
 from pandas.io.json import json_normalize
+from flask_cors import CORS, cross_origin
 import requests
 
 app = Flask(__name__)
-
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 @app.route('/ols')
+@cross_origin()
 def ols():
     return_str = 'ok'
     resp = requests.get('https://valid-decoder-258800.appspot.com/censobyedo?entidad=30')
